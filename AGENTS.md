@@ -13,11 +13,11 @@ proponer estructura o contenido, en especial las secciones 4 y 5.
   después en `belencalvo.is-a.dev`.
 
 ## Estructura de la página (en este orden)
-1. Cabecera: nombre, rol, ubicación (Mendoza, Argentina), enlaces a GitHub, LinkedIn,
-   CV (PDF) y correo.
+1. Cabecera: nombre, rol, ubicación (Mendoza, Argentina), con foto en la cabecera,
+   enlaces a GitHub, LinkedIn, CV (PDF) y correo.
 2. Proyectos destacados (3): problema que resuelve, stack, captura y botones
    Demo · Código · Docs.
-3. Tecnologías agrupadas por área, solo las usadas en los proyectos.
+3. Tecnologías agrupadas por área, con una aclaración breve del nivel o uso de cada una.
 4. Formación y cursos pertinentes.
 5. Sobre mí (3–4 líneas).
 6. Contacto: correo, LinkedIn y GitHub.

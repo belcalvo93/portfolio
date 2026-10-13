@@ -52,7 +52,8 @@ a:hover {
 }
 
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+summary:focus-visible {
   outline: 3px solid var(--acento);
   outline-offset: 2px;
 }
@@ -78,15 +79,56 @@ header {
   padding: 1.5rem 1rem;
 }
 
-header h1 {
-  margin: 0 0 0.25rem;
-  font-size: 1.75rem;
+header > nav {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 60rem;
+  margin: 0 auto 1rem;
+  animation: aparecer 0.5s ease-out;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.pildora {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  padding: 0.2rem 0.8rem;
+  border: 1.5px solid var(--acento);
+  border-radius: 999px;
+  color: var(--acento);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.hero-texto h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.5rem;
 }
 
 #rol {
   margin: 0 0 0.5rem;
   font-size: 1.1rem;
   font-weight: 500;
+  color: var(--tinta);
+}
+
+#rol strong {
+  color: var(--acento);
 }
 
 header p {
@@ -94,8 +136,109 @@ header p {
   color: var(--secundario);
 }
 
-#rol {
-  color: var(--tinta);
+.hero-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.25rem 0 1rem;
+}
+
+.hero-botones a {
+  flex: 1 1 10rem;
+  text-align: center;
+  font-weight: 500;
+  border: 2px solid var(--acento);
+  border-radius: 6px;
+  padding: 0.6rem 1.25rem;
+  text-decoration: none;
+}
+
+.btn-solido {
+  background: var(--acento);
+  color: #fff;
+}
+
+.btn-solido:hover {
+  background: var(--fondo);
+  color: var(--acento);
+  text-decoration: none;
+}
+
+.btn-borde {
+  background: transparent;
+  color: var(--acento);
+}
+
+.btn-borde:hover {
+  background: var(--acento);
+  color: #fff;
+  text-decoration: none;
+}
+
+.hero-social {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  font-size: 0.9rem;
+}
+
+.hero-foto {
+  order: -1;
+}
+
+.hero-foto .marco {
+  position: relative;
+  max-width: 13rem;
+}
+
+.hero-foto .marco::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translate(12px, 12px);
+  border: 2px solid var(--acento);
+  border-radius: 12px;
+}
+
+.hero-foto img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(91, 42, 134, 0.18);
+}
+
+.flotantes {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.flotantes li {
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-left: 6px solid var(--acento);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  box-shadow: 0 4px 16px rgba(27, 42, 59, 0.1);
+}
+
+.flotantes strong {
+  display: block;
+  font-family: var(--fuente-titulo);
+  font-size: 0.95rem;
+}
+
+.flotantes span {
+  font-family: var(--fuente-mono);
+  font-size: 0.8rem;
+  color: var(--secundario);
 }
 
 nav ul {
@@ -125,7 +268,8 @@ section > h2 {
 }
 
 /* Tarjetas de proyecto: fila de cuaderno, una debajo de otra */
-article {
+article,
+details {
   background: var(--fondo);
   border: 1px solid var(--borde);
   border-left: 8px solid var(--acento);
@@ -134,12 +278,14 @@ article {
   margin-bottom: 1.5rem;
 }
 
-article h3 {
+article h3,
+summary .t {
   margin: 0 0 0.5rem;
   font-size: 1.2rem;
 }
 
-article > p:nth-of-type(2) {
+article > p:nth-of-type(2),
+summary .e {
   display: inline-block;
   margin: 0.25rem 0 0.5rem;
   padding: 0.15rem 0.6rem;
@@ -149,19 +295,65 @@ article > p:nth-of-type(2) {
   font-size: 0.9rem;
 }
 
-article > p:nth-of-type(3) {
+article > p:nth-of-type(3),
+details > p.stack {
   font-family: var(--fuente-mono);
   font-size: 0.9rem;
   color: var(--secundario);
 }
 
-article ul {
+article ul,
+details ul {
   list-style: disc;
   padding-left: 1.25rem;
 }
 
+/* Proyectos desplegables: summary con flecha que gira */
+details summary {
+  cursor: pointer;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.15rem 0.75rem;
+  align-items: start;
+  border-radius: 4px;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::marker {
+  content: "";
+}
+
+details summary::after {
+  content: "";
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: start;
+  margin-top: 0.4rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-right: 3px solid var(--acento);
+  border-bottom: 3px solid var(--acento);
+  transform: rotate(45deg);
+}
+
+details[open] summary::after {
+  transform: rotate(225deg);
+  margin-top: 0.6rem;
+}
+
+details img {
+  margin-top: 1rem;
+  border: 1px solid var(--borde);
+  border-radius: 4px;
+}
+
 /* Botones Demo / Código / Docs */
-article ul:last-child {
+article ul:last-child,
+details ul:last-child {
   list-style: none;
   padding: 0;
   display: flex;
@@ -169,7 +361,8 @@ article ul:last-child {
   gap: 0.5rem;
 }
 
-article ul:last-child a {
+article ul:last-child a,
+details ul:last-child a {
   display: inline-block;
   font-family: var(--fuente-mono);
   font-size: 0.9rem;
@@ -181,7 +374,8 @@ article ul:last-child a {
   text-decoration: none;
 }
 
-article ul:last-child a:hover {
+article ul:last-child a:hover,
+details ul:last-child a:hover {
   background: var(--acento);
   color: #fff;
   text-decoration: none;
@@ -238,21 +432,61 @@ img {
     padding: 2rem 1.5rem;
   }
 
-  header h1 {
-    font-size: 2.25rem;
-  }
-
   main {
     padding: 1.5rem;
   }
 
-  article {
+  article,
+  details {
     padding: 1.5rem;
+  }
+}
+
+@media (min-width: 48rem) {
+  .hero {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .hero-texto h1 {
+    font-size: 3rem;
+  }
+
+  .hero-foto {
+    order: 0;
+    position: relative;
+    padding: 1.5rem;
+  }
+
+  .hero-foto .marco {
+    max-width: 20rem;
+    margin: 0 auto;
+  }
+
+  .flotantes li {
+    position: absolute;
+    z-index: 2;
+    font-size: 0.8rem;
+  }
+
+  .flotantes li:first-child {
+    top: 0;
+    left: 0;
+  }
+
+  .flotantes li:last-child {
+    bottom: 0;
+    right: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .hero {
+    animation: none;
   }
 }
