@@ -5,40 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portfolio de Belén Calvo, Mendoza, Argentina. Proyectos, formación y contacto.">
   <title>Belén Calvo — Portfolio</title>
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=6">
   <script src="main.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header>
-    <div class="hero">
-      <div class="hero-texto">
-        <p class="pildora" data-i18n="etiqueta">Estudiante · UTN Mendoza</p>
-        <h1 data-i18n="nombre">Belén Calvo</h1>
-        <!-- ROL: cambiar solo aquí. No repetir el rol en otro lugar del HTML. -->
-        <p id="rol" data-i18n="rol">Estudiante de programación (<strong>backend y frontend</strong>, bases de datos, agentes de IA)</p>
-        <p data-i18n="ubicacion">Mendoza, Argentina · Modalidad: remota o híbrida</p>
-        <p class="hero-botones">
-          <a class="btn-solido" href="#proyectos">Ver proyectos</a>
-          <a class="btn-borde" href="assets/cv/CV-BelenCalvo.pdf">Descargar CV [PENDIENTE: subir PDF a assets/cv/]</a>
-        </p>
-        <ul class="hero-social">
-          <li><a href="https://github.com/belcalvo93" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="https://www.linkedin.com/in/belucalvo/" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="mailto:beluucalvo@live.com.ar">beluucalvo@live.com.ar</a></li>
-        </ul>
-      </div>
-      <div class="hero-foto">
-        <div class="marco">
-          <img src="assets/img/foto-belen.webp" alt="Foto de Belén Calvo" width="800" height="1067">
-        </div>
-        <ul class="flotantes">
-          <li><strong>JavaMaster</strong><span>52 lecciones · 208 ejercicios</span></li>
-          <li><strong>Food Store</strong><span>PostgreSQL · ~200.000 pedidos de prueba</span></li>
-        </ul>
-      </div>
-    </div>
     <nav aria-label="Navegación por secciones">
       <ul>
         <li><a href="#proyectos">Proyectos</a></li>
@@ -49,6 +22,28 @@
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </nav>
+    <div class="hero">
+      <div class="hero-texto">
+        <p class="pildora" data-i18n="etiqueta">Estudiante · UTN Mendoza</p>
+        <h1 data-i18n="nombre">Belén Calvo</h1>
+        <!-- ROL: cambiar solo aquí. No repetir el rol en otro lugar del HTML. -->
+        <p id="rol" data-i18n="rol">Estudiante de programación (<strong>backend y frontend</strong>, bases de datos, agentes de IA)</p>
+        <p data-i18n="ubicacion">Mendoza, Argentina · Modalidad: remota o híbrida</p>
+        <p class="hero-botones">
+          <a class="btn-solido" href="#proyectos">Ver proyectos</a>
+          <!-- [PENDIENTE: subir PDF a assets/cv/ y volver a link Descargar CV] -->
+          <span class="btn-borde btn-apagado">Descargar CV (próximamente)</span>
+        </p>
+        <ul class="hero-social">
+          <li><a href="https://github.com/belcalvo93" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/belucalvo/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="mailto:beluucalvo@live.com.ar">beluucalvo@live.com.ar</a></li>
+        </ul>
+      </div>
+      <div class="hero-foto">
+        <img src="assets/img/foto-belen-sin-fondo.webp" alt="Foto de Belén Calvo" width="800" height="1067">
+      </div>
+    </div>
   </header>
 
   <main id="contenido">
