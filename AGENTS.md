@@ -18,8 +18,10 @@ proponer estructura o contenido, en especial las secciones 4 y 5.
 ## Estructura y separación de datos
 - El contenido (proyectos, tecnologías, formación, logros, perfil e idiomas ES/EN) vive
   en `src/data/` separado de la escena 3D (`src/game/`) y de la UI (`src/ui/`).
-- Se pueden sumar proyectos nuevos en `src/data/projects.ts` sin tocar la escena 3D.
-- Las imágenes públicas están en `public/assets/img/` (retrato: `assets/img/foto-belen-retrato.webp`).
+- Para sumar un proyecto nuevo (por ejemplo Ateneo o Gatoteca), solo hay que agregar un
+  objeto al arreglo `projects` en `src/data/projects.ts` siguiendo la interfaz `ProjectItem`
+  de `src/types/content.ts`, sin tocar la escena 3D ni los componentes de UI.
+- Las imágenes públicas están en `public/assets/img/` (retrato: `assets/img/foto-belen-fundida.webp`).
 
 ## Diseño e interfaz
 - Concepto 3D: "Tejados al atardecer" — gato recorriendo techos low-poly con ventanas iluminadas.
