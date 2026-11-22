@@ -1,36 +1,43 @@
 /* Design tokens — Portfolio Belén Calvo
-   Paleta: fondo #0F0D18, lila #C09BFF, fucsia #F472B6, azul francia #6EA8FF, rosado #FDA4CF.
-   Contraste WCAG 2.2 AA en modo oscuro (defecto) y modo claro. */
+   Modo oscuro: --bg #15081C, --bg-alt #1E0B28, --surface #261132, --border #31183F, --acento #8806CE.
+   Para texto y detalles sobre fondo oscuro: lila #C09BFF (contraste WCAG 2.2 AA). */
 
 :root {
-  /* Superficies (modo oscuro por defecto) */
-  --bg-base: #0F0D18;
-  --bg-surface: #171426;
-  --bg-elevated: #1F1B33;
-  --bg-glass: rgba(23, 20, 38, 0.86);
-  --bg-glass-hover: rgba(31, 27, 51, 0.92);
+  /* Paleta base (modo oscuro por defecto) */
+  --bg: #15081C;
+  --bg-alt: #1E0B28;
+  --surface: #261132;
+  --border: #31183F;
+  --acento: #8806CE;
+
+  /* Alias semánticos */
+  --bg-base: var(--bg);
+  --bg-surface: var(--surface);
+  --bg-elevated: #2F163E;
+  --bg-glass: rgba(30, 11, 40, 0.86);
+  --bg-glass-hover: rgba(38, 17, 50, 0.94);
 
   /* Texto */
   --text-primary: #F5F2FB;
-  --text-secondary: #C8C1DA;
-  --text-muted: #9D95B5;
+  --text-secondary: #D4CCE3;
+  --text-muted: #A99CC0;
   --text-on-accent: #0F0D18;
 
-  /* Acentos */
+  /* Acentos (lila #C09BFF para texto/detalles AA sobre oscuro) */
   --accent-lila: #C09BFF;
   --accent-fucsia: #F472B6;
   --accent-azul: #6EA8FF;
   --accent-rosado: #FDA4CF;
 
   /* Bordes */
-  --border-subtle: rgba(245, 242, 251, 0.12);
-  --border-strong: rgba(192, 155, 255, 0.36);
+  --border-subtle: var(--border);
+  --border-strong: rgba(192, 155, 255, 0.42);
   --border-glass: rgba(245, 242, 251, 0.16);
 
   /* Neumorphism suave (solo controles secundarios) */
-  --neu-bg: #171426;
+  --neu-bg: var(--bg-alt);
   --neu-shadow-light: rgba(255, 255, 255, 0.04);
-  --neu-shadow-dark: rgba(5, 4, 10, 0.65);
+  --neu-shadow-dark: rgba(8, 2, 12, 0.72);
 
   /* Tipografía */
   --font-display: 'Playfair Display', Georgia, serif;
@@ -52,9 +59,15 @@
 }
 
 [data-theme='light'] {
-  --bg-base: #FAF8FD;
-  --bg-surface: #FFFFFF;
-  --bg-elevated: #F2EEF9;
+  --bg: #FAF8FD;
+  --bg-alt: #F3EEF9;
+  --surface: #FFFFFF;
+  --border: rgba(23, 19, 36, 0.12);
+  --acento: #7C3AED;
+
+  --bg-base: var(--bg);
+  --bg-surface: var(--surface);
+  --bg-elevated: var(--bg-alt);
   --bg-glass: rgba(255, 255, 255, 0.88);
   --bg-glass-hover: rgba(255, 255, 255, 0.96);
 
@@ -63,18 +76,18 @@
   --text-muted: #5F5678;
   --text-on-accent: #FFFFFF;
 
-  --accent-lila: #5B2A86;
+  --accent-lila: #7C3AED;
   --accent-fucsia: #B82973;
   --accent-azul: #2358B8;
   --accent-rosado: #9E3B72;
 
-  --border-subtle: rgba(23, 19, 36, 0.12);
-  --border-strong: rgba(91, 42, 134, 0.35);
+  --border-subtle: var(--border);
+  --border-strong: rgba(124, 58, 237, 0.36);
   --border-glass: rgba(23, 19, 36, 0.14);
 
-  --neu-bg: #F3EFFA;
+  --neu-bg: var(--bg-alt);
   --neu-shadow-light: rgba(255, 255, 255, 0.9);
   --neu-shadow-dark: rgba(91, 42, 134, 0.14);
 
-  --focus-ring: 0 0 0 3px rgba(91, 42, 134, 0.38);
+  --focus-ring: 0 0 0 3px rgba(124, 58, 237, 0.38);
 }
