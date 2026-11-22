@@ -1,203 +1,23 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio de Belén Calvo, Mendoza, Argentina. Proyectos, formación y contacto.">
-  <title>Belén Calvo — Portfolio</title>
-  <link rel="stylesheet" href="styles.css?v=6">
-  <script src="main.js" defer></script>
-</head>
-<body>
-  <a class="skip-link" href="#contenido">Saltar al contenido</a>
-
-  <header>
-    <nav aria-label="Navegación por secciones">
-      <ul>
-        <li><a href="#proyectos">Proyectos</a></li>
-        <li><a href="#otros-trabajos">Otros trabajos</a></li>
-        <li><a href="#tecnologias">Tecnologías</a></li>
-        <li><a href="#formacion">Formación</a></li>
-        <li><a href="#sobre-mi">Sobre mí</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-    </nav>
-    <div class="hero">
-      <div class="hero-texto">
-        <p class="pildora" data-i18n="etiqueta">Estudiante · UTN Mendoza</p>
-        <h1 data-i18n="nombre">Belén Calvo</h1>
-        <!-- ROL: cambiar solo aquí. No repetir el rol en otro lugar del HTML. -->
-        <p id="rol" data-i18n="rol">Estudiante de programación (<strong>backend y frontend</strong>, bases de datos, agentes de IA)</p>
-        <p data-i18n="ubicacion">Mendoza, Argentina · Modalidad: remota o híbrida</p>
-        <p class="hero-botones">
-          <a class="btn-solido" href="#proyectos">Ver proyectos</a>
-          <!-- [PENDIENTE: subir PDF a assets/cv/ y volver a link Descargar CV] -->
-          <span class="btn-borde btn-apagado">Descargar CV (próximamente)</span>
-        </p>
-        <ul class="hero-social">
-          <li><a href="https://github.com/belcalvo93" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="https://www.linkedin.com/in/belucalvo/" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="mailto:beluucalvo@live.com.ar">beluucalvo@live.com.ar</a></li>
-        </ul>
-      </div>
-      <div class="hero-foto">
-        <img src="assets/img/foto-belen-sin-fondo.webp" alt="Foto de Belén Calvo" width="800" height="1067">
-      </div>
-    </div>
-  </header>
-
-  <main id="contenido">
-    <section id="proyectos" aria-labelledby="titulo-proyectos">
-      <h2 id="titulo-proyectos" data-i18n="proyectos">Proyectos destacados</h2>
-
-      <details>
-        <summary>
-          <span class="t" id="proyecto-1">Food Store — Base de datos para un sistema de pedidos</span>
-          <span class="e">Académico · UTN, Base de Datos II</span>
-          <span class="f">Diseño e implementación en PostgreSQL de la base de datos de un negocio de comidas, desde el modelo hasta la optimización de consultas.</span>
-        </summary>
-        <img src="assets/img/food-store.webp" alt="Diagrama entidad-relación de la base de datos Food Store" loading="lazy" width="1200" height="947">
-        <ul>
-          <li>Modelo entidad-relación normalizado a 3FN/BCNF</li>
-          <li>Triggers que validan stock y producto activo, con pruebas</li>
-          <li>Carga masiva de ~200.000 pedidos y mejora medida de índices con EXPLAIN ANALYZE</li>
-        </ul>
-        <p class="stack">Stack: PostgreSQL 17 · SQL · triggers · índices · vistas</p>
-        <ul>
-          <li><a href="https://github.com/belcalvo93/base-datos-2" target="_blank" rel="noopener">Código</a></li>
-          <li><a href="https://github.com/belcalvo93/base-datos-2#readme" target="_blank" rel="noopener">Docs</a></li>
-        </ul>
-      </details>
-
-      <details>
-        <summary>
-          <span class="t" id="proyecto-2">JavaMaster — Plataforma para aprender Java en español</span>
-          <span class="e">Personal · en desarrollo</span>
-          <span class="f">Plataforma gratuita para aprender Java con lecciones y ejercicios prácticos, sin pagar bootcamps.</span>
-        </summary>
-        <img src="assets/img/javamaster.webp" alt="Ejercicio de JavaMaster con el editor de código y la validación aprobada" loading="lazy" width="1200" height="750">
-        <ul>
-          <li>52 lecciones organizadas en 4 niveles</li>
-          <li>208 ejercicios con validación instantánea en el navegador</li>
-          <li>Progreso guardado localmente, con aviso visible de sus límites</li>
-        </ul>
-        <p class="stack">Stack: HTML · CSS · JavaScript · GitHub Pages</p>
-        <ul>
-          <li><a href="https://java.belencalvo.me" target="_blank" rel="noopener">Demo</a></li>
-          <li><a href="https://github.com/belcalvo93/java-learning-platform" target="_blank" rel="noopener">Código</a></li>
-          <li><a href="https://github.com/belcalvo93/java-learning-platform#readme" target="_blank" rel="noopener">Docs</a></li>
-        </ul>
-      </details>
-
-      <details>
-        <summary>
-          <span class="t" id="proyecto-3">Feria de proyectos — Interfaz web responsive</span>
-          <span class="e">Académico · UTN, Programación III · individual</span>
-          <span class="f">Página que presenta proyectos en tarjetas con panel de detalle, construida con metodología BEM y CSS avanzado.</span>
-        </summary>
-        <img src="assets/img/feria.webp" alt="Feria de proyectos en pantalla de escritorio con cuatro tarjetas" loading="lazy" width="1200" height="686">
-        <ul>
-          <li>Responsive probado en celular, tablet y escritorio</li>
-          <li>Panel de detalle que se cierra con botón, clic afuera o tecla Escape</li>
-          <li>Navegación completa por teclado con foco visible</li>
-        </ul>
-        <p class="stack">Stack: HTML · CSS (BEM) · JavaScript</p>
-        <ul>
-          <li>Demo — [PENDIENTE: URL de Vercel]</li>
-          <li><a href="https://github.com/belcalvo93/feria-de-proyectos" target="_blank" rel="noopener">Código</a></li>
-          <li><a href="https://github.com/belcalvo93/feria-de-proyectos#readme" target="_blank" rel="noopener">Docs</a></li>
-        </ul>
-      </details>
-    </section>
-
-    <section id="otros-trabajos" aria-labelledby="titulo-otros">
-      <h2 id="titulo-otros" data-i18n="otros-trabajos">Otros trabajos</h2>
-
-      <article aria-labelledby="otro-1">
-        <h3 id="otro-1">Fundamentos de programación en Python</h3>
-        <p>Ejercicios por unidad: estructuras secuenciales, condicionales y repetitivas, listas, funciones, datos complejos, manejo de archivos y recursividad. Incluye un trabajo integrador en dupla.</p>
-        <p>Académico · UTN, Programación I</p>
-        <ul>
-          <li><a href="https://github.com/belcalvo93/UTN-TUPaDProgramacion1" target="_blank" rel="noopener">Código</a></li>
-        </ul>
-      </article>
-
-      <article aria-labelledby="otro-2">
-        <h3 id="otro-2">Prácticas de programación en Python</h3>
-        <p>Ejercicios resueltos durante las clases.</p>
-        <p>Académico · UTN, Programación I</p>
-        <ul>
-          <li><a href="https://github.com/belcalvo93/Programacion1Prof.Hualpa" target="_blank" rel="noopener">Código</a></li>
-        </ul>
-      </article>
-    </section>
-
-    <section id="tecnologias" aria-labelledby="titulo-tecnologias">
-      <h2 id="titulo-tecnologias" data-i18n="tecnologias">Tecnologías</h2>
-      <p>Con una aclaración breve del nivel o uso de cada una.</p>
-      <h3>Lenguajes</h3>
-      <ul>
-        <li>Java (POO, herencia, polimorfismo, interfaces, excepciones, colecciones)</li>
-        <li>Python (funciones, estructuras de datos, archivos CSV, APIs y POO)</li>
-        <li>SQL</li>
-        <li>HTML5</li>
-        <li>CSS3</li>
-        <li>JavaScript (nivel básico)</li>
-        <li>R (análisis estadístico básico)</li>
-      </ul>
-      <h3>Backend y bases de datos</h3>
-      <ul>
-        <li>FastAPI</li>
-        <li>PostgreSQL (transacciones ACID, MVCC, niveles de aislamiento y bloqueos)</li>
-        <li>MySQL / MariaDB</li>
-        <li>Modelado entidad-relación, normalización y modelo dimensional</li>
-      </ul>
-      <h3>Herramientas</h3>
-      <ul>
-        <li>Git y GitHub (ramas y pull requests en equipo)</li>
-        <li>VS Code</li>
-        <li>IntelliJ IDEA</li>
-        <li>Git Bash</li>
-        <li>psql</li>
-        <li>pgAdmin</li>
-        <li>MySQL Workbench</li>
-        <li>Docker</li>
-        <li>UML</li>
-      </ul>
-      <h3>IA aplicada al desarrollo</h3>
-      <ul>
-        <li>OpenCode y configuración de agentes con AGENTS.md</li>
-        <li>Claude Code</li>
-        <li>GitHub Copilot</li>
-        <li>Antigravity</li>
-        <li>Kiro</li>
-        <li>Prompt engineering por roles</li>
-      </ul>
-    </section>
-
-    <section id="formacion" aria-labelledby="titulo-formacion">
-      <h2 id="titulo-formacion" data-i18n="formacion">Formación</h2>
-      <ul>
-        <li>Tecnicatura Universitaria en Programación, UTN Mendoza — en curso (2025 – egreso estimado 2027)</li>
-        <li>Curso de Java Profesional – Código Facilito (feb 2026)</li>
-        <li>Iniciación al Desarrollo con IA – BIG school (mar 2026)</li>
-        <li>Introducción a la Ciencia de Datos – Santander Open Academy (ago 2026)</li>
-      </ul>
-    </section>
-
-    <section id="sobre-mi" aria-labelledby="titulo-sobre-mi">
-      <h2 id="titulo-sobre-mi" data-i18n="sobre-mi">Sobre mí</h2>
-      <p>[PENDIENTE: texto de 3–4 líneas en tus palabras]</p>
-    </section>
-  </main>
-
-  <footer id="contacto" aria-labelledby="titulo-contacto">
-    <h2 id="titulo-contacto" data-i18n="contacto">Contacto</h2>
-    <ul>
-      <li><a href="mailto:beluucalvo@live.com.ar">beluucalvo@live.com.ar</a></li>
-      <li><a href="https://www.linkedin.com/in/belucalvo/" target="_blank" rel="noopener">LinkedIn</a></li>
-      <li><a href="https://github.com/belcalvo93" target="_blank" rel="noopener">GitHub</a></li>
-    </ul>
-  </footer>
-</body>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio de Belén Calvo — Estudiante de Programación (Backend, Frontend y Bases de Datos). Mendoza, Argentina."
+    />
+    <title>Belén Calvo — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
