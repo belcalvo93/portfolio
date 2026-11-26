@@ -24,9 +24,15 @@ proponer estructura o contenido, en especial las secciones 4 y 5.
 - Las imágenes públicas están en `public/assets/img/` (retrato: `assets/img/foto-belen-fundida.webp`).
 
 ## Diseño e interfaz
-- Concepto 3D: "Tejados al atardecer" — gato recorriendo techos low-poly con ventanas iluminadas.
+- Concepto 3D: "Tejados de París" — gato recorriendo techos low-poly con ventanas iluminadas.
+  Modo oscuro (predeterminado): noche con estrellas sutiles y luna llena con detalles reales
+  sutiles (dibujada por código, sin imágenes). Modo claro: amanecer con cielo en tonos rosados.
+- Techos: piso y rebordes color teja anaranjado; faldones y techitos de las buhardillas en
+  pizarra gris; puentes entre techos de tablones de madera (se ven agregados, no originales).
+- Botón de tema con íconos: luna en modo oscuro, sol en modo claro.
+- El gato entra por la ventana iluminada de cada sección y la información se muestra en una
+  tarjeta/panel accesible.
 - Paleta: fondo `#0F0D18`, lila `#C09BFF`, fucsia `#F472B6`, azul francia `#6EA8FF`, rosado `#FDA4CF`.
-  Nada de lunas ni estrellas.
 - Prohibido: manchas de degradé brillante desde esquinas, glows difusos de fondo, gradientes
   saturados en todo el fondo o texto con degradé. Fondos planos o con textura de grano muy sutil.
 - Tipografía: títulos en `Playfair Display`, textos en `DM Sans`, detalles de código en `JetBrains Mono`.
