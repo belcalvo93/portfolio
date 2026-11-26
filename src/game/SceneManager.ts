@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import type { Locale, SectionId } from '../types/content';
 import { CatPlayer } from './CatPlayer';
 import { InputController } from './InputController';
-import { RooftopsWorld } from './RooftopsWorld';
+import { RooftopsWorld, SKY_HORIZON } from './RooftopsWorld';
 import { findNearestWindow, getApproachPoint, hopPosition, type Point3, type WindowAnchor } from './windowLogic';
 
 export interface SceneManagerOptions {
@@ -58,6 +58,8 @@ export class SceneManager {
   private nearWindow: SectionId | null = null;
   private activeWindow: SectionId | null = null;
   private animT = 0;
+  /** Cuánto tiempo lleva el gato sin poder avanzar hacia el punto tocado. */
+  private stuckTime = 0;
   private animFrom: Point3 = { x: 0, y: 0, z: 0 };
   private readonly anchors: WindowAnchor[];
 
@@ -67,11 +69,12 @@ export class SceneManager {
     this.container = container;
 
     this.scene = new THREE.Scene();
-    this.scene.fog = new THREE.FogExp2(theme === 'light' ? 0xf0c8d2 : 0x272550, 0.0085);
+    this.scene.fog = new THREE.FogExp2(SKY_HORIZON[theme], 0.0085);
 
     const width = container.clientWidth || window.innerWidth;
     const height = container.clientHeight || window.innerHeight;
-    this.camera = new THREE.PerspectiveCamera(48, width / height, 0.1, 180);
+    // Lejos llega a 280 para ver la ciudad entera (la neblina la va borrando)
+    this.camera = new THREE.PerspectiveCamera(48, width / height, 0.1, 280);
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -109,6 +112,7 @@ export class SceneManager {
       {
         onWindowTap: (id) => this.enterWindow(id as SectionId),
         onAction: () => this.enterWindow(),
+        clampTarget: (x, z) => this.world.clampPosition(x, z),
       }
     );
 
@@ -117,6 +121,11 @@ export class SceneManager {
 
     this.setTheme(theme);
     this.startLoop();
+
+    // Solo en desarrollo: permite inspeccionar la escena desde la consola (no va a producción)
+    if (import.meta.env.DEV) {
+      (window as unknown as { __scene?: unknown }).__scene = this;
+    }
   }
 
   setTheme(theme: 'dark' | 'light'): void {
@@ -124,14 +133,14 @@ export class SceneManager {
     const fog = this.scene.fog as THREE.FogExp2 | null;
     if (theme === 'light') {
       // Sol de amanecer: luz rosada y cálida
-      if (fog) fog.color.setHex(0xf0c8d2);
+      if (fog) fog.color.setHex(SKY_HORIZON.light);
       this.ambientLight.color.setHex(0xfff0f4);
       this.ambientLight.intensity = 1.0;
       this.dirLight.color.setHex(0xffd6e2);
       this.dirLight.intensity = 1.0;
     } else {
       // Luz de luna: azulada pero con fuerza suficiente para ver texturas
-      if (fog) fog.color.setHex(0x272550);
+      if (fog) fog.color.setHex(SKY_HORIZON.dark);
       this.ambientLight.color.setHex(0xa3aee8);
       this.ambientLight.intensity = 1.15;
       this.dirLight.color.setHex(0xdde4ff);
@@ -193,6 +202,7 @@ export class SceneManager {
   }
 
   private finishExit(): void {
+    if (this.activeWindow) this.world.setWindowOpen(this.activeWindow, 0);
     const anchor = this.activeWindow ? this.world.getWindowAnchor(this.activeWindow) : null;
     if (anchor) {
       const spot = getApproachPoint(anchor);
@@ -264,6 +274,8 @@ export class SceneManager {
       this.mode = 'walk';
     }
 
+    const startX = pos.x;
+    const startZ = pos.z;
     const move = this.input.getMoveVector(pos);
     this.cat.update(dt, move.x, move.z);
 
@@ -271,6 +283,24 @@ export class SceneManager {
     const clamped = this.world.clampPosition(pos.x, pos.z);
     pos.x = clamped.x;
     pos.z = clamped.z;
+
+    // Si va hacia un punto tocado pero algo lo frena (una chimenea en el medio),
+    // después de un ratito deja de intentarlo en vez de "caminar en el lugar".
+    if (this.input.hasTarget()) {
+      const moved = Math.hypot(pos.x - startX, pos.z - startZ);
+      this.stuckTime = moved < dt * 0.6 ? this.stuckTime + dt : 0;
+      if (this.stuckTime > 0.3) {
+        this.input.clearTarget();
+        this.stuckTime = 0;
+        if (this.mode === 'approach') {
+          this.mode = 'walk';
+          this.activeWindow = null;
+          return;
+        }
+      }
+    } else {
+      this.stuckTime = 0;
+    }
 
     this.setNearWindow(findNearestWindow(pos, this.anchors) as SectionId | null);
 
@@ -305,8 +335,12 @@ export class SceneManager {
     const cat = this.cat.group;
     this.cat.update(dt, 0, 0);
 
+    const id = this.activeWindow as SectionId;
+
     if (this.mode === 'entering') {
       this.animT = Math.min(1, this.animT + dt / ENTER_DURATION);
+      // Las hojas se abren de par en par mientras el gato toma impulso
+      this.world.setWindowOpen(id, easeInOut(Math.min(1, this.animT / 0.4)));
       cat.rotation.y = FACE_WINDOW;
       if (this.animT < HOP_PART) {
         const t = easeInOut(this.animT / HOP_PART);
@@ -328,6 +362,8 @@ export class SceneManager {
 
     if (this.mode === 'exiting') {
       this.animT = Math.min(1, this.animT + dt / EXIT_DURATION);
+      // Una vez que el gato saltó afuera, la ventana se cierra
+      this.world.setWindowOpen(id, this.animT < 0.55 ? 1 : 1 - easeInOut((this.animT - 0.55) / 0.45));
       cat.visible = true;
       const t = easeInOut(this.animT);
       const p = hopPosition(sill, outside, t);
