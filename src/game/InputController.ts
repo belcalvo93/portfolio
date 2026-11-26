@@ -5,6 +5,11 @@ export interface InputCallbacks {
   onWindowTap?: (sectionId: string) => void;
   /** Se apretó la tecla de acción (E o Enter fuera de un botón). */
   onAction?: () => void;
+  /**
+   * Corrige el punto tocado a un lugar donde el gato pueda pararse
+   * (si no, se quedaría caminando en el lugar contra una baranda).
+   */
+  clampTarget?: (x: number, z: number) => { x: number; z: number };
 }
 
 const MOVE_KEYS = ['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'];
@@ -91,13 +96,15 @@ export class InputController {
 
     const hits = this.raycaster.intersectObjects(this.walkableMeshes, false);
     if (hits.length > 0) {
-      this.targetPoint = hits[0].point.clone();
+      const { x, z } = hits[0].point;
+      this.setTarget(x, z);
     }
   };
 
   /** Manda al gato caminando solo hasta un punto del techo. */
   setTarget(x: number, z: number): void {
-    this.targetPoint = new THREE.Vector3(x, 0, z);
+    const p = this.callbacks.clampTarget?.(x, z) ?? { x, z };
+    this.targetPoint = new THREE.Vector3(p.x, 0, p.z);
   }
 
   hasTarget(): boolean {
