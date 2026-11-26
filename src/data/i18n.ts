@@ -25,6 +25,13 @@ export const uiText: Record<
       toDark: string;
       close: string;
     };
+    game: {
+      loading: string;
+      hint: string;
+      /** Botón que aparece frente a una ventana; {section} se reemplaza por el nombre. */
+      enter: string;
+      enterKey: string;
+    };
     hero: {
       viewProjects: string;
       downloadCv: string;
@@ -74,9 +81,15 @@ export const uiText: Record<
     controls: {
       disableGame: 'Desactivar juego',
       enableGame: 'Activar juego',
-      toLight: 'Claro',
-      toDark: 'Oscuro',
+      toLight: 'Cambiar a modo claro',
+      toDark: 'Cambiar a modo oscuro',
       close: 'Cerrar',
+    },
+    game: {
+      loading: 'Cargando los tejados…',
+      hint: 'Mové al gato con WASD / flechas o tocá una ventana',
+      enter: 'Entrar a {section}',
+      enterKey: 'Tecla E',
     },
     hero: {
       viewProjects: 'Ver proyectos',
@@ -127,9 +140,15 @@ export const uiText: Record<
     controls: {
       disableGame: 'Disable game',
       enableGame: 'Enable game',
-      toLight: 'Light',
-      toDark: 'Dark',
+      toLight: 'Switch to light mode',
+      toDark: 'Switch to dark mode',
       close: 'Close',
+    },
+    game: {
+      loading: 'Loading rooftops…',
+      hint: 'Move the cat with WASD / arrows or tap a window',
+      enter: 'Enter {section}',
+      enterKey: 'Key E',
     },
     hero: {
       viewProjects: 'View projects',

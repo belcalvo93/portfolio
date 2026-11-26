@@ -9,6 +9,7 @@ export class WindowPanel {
   private overlay: HTMLDivElement;
   private dialog: HTMLElement;
   private titleEl: HTMLHeadingElement;
+  private eyebrowEl: HTMLParagraphElement;
   private bodyEl: HTMLDivElement;
   private closeBtn: HTMLButtonElement;
   private lastFocused: HTMLElement | null = null;
@@ -25,7 +26,11 @@ export class WindowPanel {
       <div class="window-backdrop" data-close="true"></div>
       <section class="glass-panel window-dialog" role="dialog" aria-modal="true" aria-labelledby="window-panel-title" tabindex="-1">
         <header class="window-header">
-          <h2 id="window-panel-title"></h2>
+          <span class="window-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          <div class="window-heading">
+            <p class="window-eyebrow" hidden></p>
+            <h2 id="window-panel-title"></h2>
+          </div>
           <button type="button" class="neu-control window-close" aria-label="Cerrar panel"></button>
         </header>
         <div class="window-body"></div>
@@ -36,6 +41,7 @@ export class WindowPanel {
 
     this.dialog = this.overlay.querySelector('.window-dialog') as HTMLElement;
     this.titleEl = this.overlay.querySelector('#window-panel-title') as HTMLHeadingElement;
+    this.eyebrowEl = this.overlay.querySelector('.window-eyebrow') as HTMLParagraphElement;
     this.bodyEl = this.overlay.querySelector('.window-body') as HTMLDivElement;
     this.closeBtn = this.overlay.querySelector('.window-close') as HTMLButtonElement;
 
@@ -50,12 +56,21 @@ export class WindowPanel {
     document.addEventListener('keydown', this.handleKeyDown);
   }
 
-  open(sectionId: SectionId, locale: Locale): void {
+  /**
+   * @param fromGame si se abre porque el gato entró por la ventana: se muestra como
+   *   panel lateral (escritorio) u hoja desde abajo (celular), dejando ver la escena.
+   */
+  open(sectionId: SectionId, locale: Locale, fromGame = false): void {
     this.lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    this.titleEl.textContent = getSectionTitle(sectionId, locale);
+    const title = getSectionTitle(sectionId, locale);
+    this.titleEl.textContent = title;
+    this.overlay.classList.toggle('window-overlay--game', fromGame);
+    this.eyebrowEl.hidden = !fromGame;
+    this.eyebrowEl.textContent = `~/${title.toLowerCase()}`;
     this.closeBtn.textContent = uiText[locale].controls.close;
     this.closeBtn.setAttribute('aria-label', uiText[locale].controls.close);
     this.bodyEl.innerHTML = renderSectionContent(sectionId, locale);
+    this.bodyEl.scrollTop = 0;
 
     this.overlay.hidden = false;
     document.body.classList.add('has-modal');
